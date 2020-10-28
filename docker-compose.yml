@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  server-template:
+    build: .
+    volumes:
+      - .:/usr/src/client
+      - /usr/src/client/node_modules
+    ports:
+      - 3000:3000
+    command: yarn start:prod
