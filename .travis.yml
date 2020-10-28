@@ -1,0 +1,34 @@
+sudo: required
+language: node_js
+node_js:
+  - '12.19.0'
+services:
+  - docker
+
+before_install:
+  # install heroku CLI
+  - wget -qO- https://toolbelt.heroku.com/install.sh | sh
+  # login to docker registries (dockerhub + heroku)
+  - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+  - echo "$HEROKU_PASS" | docker login -u "$HEROKU_USER" --password-stdin registry.heroku.com
+
+install:
+  # install deps
+  - yarn install
+
+script:
+  # - yarn lint
+  - yarn build
+  # build docker images
+  - docker build -t codemax79/react-webpack-boilerplate .
+  - docker tag codemax79/react-webpack-boilerplate:latest registry.heroku.com/react-webpack-boilerplate/web
+
+deploy:
+  provider: script
+  script:
+    # push to dockerhub & heroku
+    docker push codemax79/react-webpack-boilerplate;
+    docker push registry.heroku.com/react-webpack-boilerplate/web;
+    heroku container:release web --app react-webpack-boilerplate
+  on:
+    branch: master
