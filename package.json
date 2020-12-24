@@ -17,7 +17,7 @@
     "stylelint": "stylelint \"./src/**/*.scss\" --formatter verbose"
   },
   "dependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "class-validator": "^0.12.2",
     "classnames": "^2.2.6",
     "config": "^3.3.2",
