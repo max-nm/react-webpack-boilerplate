@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "axios": "^0.21.3",
-    "class-validator": "^0.12.2",
+    "class-validator": "^0.13.0",
     "classnames": "^2.2.6",
     "config": "^3.3.2",
     "custom-env": "^2.0.1",
